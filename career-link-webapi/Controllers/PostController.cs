@@ -13,7 +13,7 @@ namespace Career_link_webapi.Controllers
             _postService = taskService;
         }
 
-        [HttpGet("alltask")]
+        [HttpGet("allpost")]
         public async Task<IActionResult> GetAllTask()
         {
             return Ok(await _postService.GetPosts());
