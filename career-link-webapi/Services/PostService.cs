@@ -1,63 +1,35 @@
-﻿using Career_link_webapi.Data;
-using Career_link_webapi.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Career_link_webapi.Services
+public class PostService
 {
-    public interface IPostService
+    private readonly MyAppContext _context;
+
+    public PostService(MyAppContext context)
     {
-        Task<List<PostDTO>> GetPosts(); 
-        Task<PostDTO> GetPostById(int id); 
+        _context = context;
     }
 
-    public class PostService : IPostService
+    public async Task<Post> CreatePost(Post post)
     {
-        private readonly CareerLinkDbContext _dbContext;
-
-        public PostService(CareerLinkDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public async Task<List<PostDTO>> GetPosts()
-        {
-            return await _dbContext.Posts
-                .Select(x => new PostDTO
-                {
-                    UserId = x.UserId,
-                    Description = x.Description,
-                    CreatedDate = x.CreatedDate,
-                    UpdatedDate = x.UpdatedDate
-                })
-                .ToListAsync();
-        }
-
-        public async Task<PostDTO> GetPostById(int id)
-        {
-            try
-            {
-                var post = await _dbContext.Posts
-                    .Where(x => x.PostId == id)
-                    .Select(x => new PostDTO
-                    {
-                        UserId = x.UserId,
-                        Description = x.Description,
-                        CreatedDate = x.CreatedDate,
-                        UpdatedDate = x.UpdatedDate
-                    })
-                    .FirstOrDefaultAsync();
-
-                if (post == null)
-                {
-                    throw new KeyNotFoundException($"Post with ID {id} not found.");
-                }
-
-                return post;
-            }
-            catch (Exception ex)
-            {
-                throw; 
-            }
-        }
+        _context.Posts.Add(post);
+        await _context.SaveChangesAsync();
+        return post;
     }
+    public async Task<IEnumerable<Post>> GetAllPosts()
+    {
+        return await _context.Posts.ToListAsync();
+    }
+    public async Task<Post> GetPostById(int id)
+    {
+        return await _context.Posts.FindAsync(id);
+    }
+    public async Task<IEnumerable<Post>> GetPostsByCandidateId(int candidateId)
+    {
+        return await _context.Posts.Where(p => p.CandidateId == candidateId).ToListAsync();
+    }
+
 }

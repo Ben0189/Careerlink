@@ -1,5 +1,4 @@
-using Career_link_webapi.Data;
-using Career_link_webapi.Services;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,16 +6,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<CandidateService>();
+builder.Services.AddScoped<PostService>();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IPostService, PostService>();
 
-if (builder.Environment.IsDevelopment())
-{
-    var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    builder.Services.AddDbContext<CareerLinkDbContext>(options => options.UseSqlServer(databaseConnectionString));
-}
+
+var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<MyAppContext>(options => options.UseSqlServer(databaseConnectionString));
+
 
 builder.Services.AddCors(options =>
 {
