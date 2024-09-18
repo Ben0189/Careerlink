@@ -44,15 +44,15 @@ export default function CreatePost() {
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(handleSubmit)} 
-          className="max-w-md w-full flex-col gap-4"
+          className="max-w-md w-full flex-col gap-6"
         >
           <FormField 
             control={form.control} 
             name="jobTitle" 
             render={({ field }) => {
               return (
-              <FormItem>
-                <FormLabel className="text-black">Job Title</FormLabel>
+              <FormItem style={{ marginBottom: "13px"}}>
+                <FormLabel className="text-lg font-bold">Job Title</FormLabel>
                 <FormControl>
                   <Input className="text-black" placeholder="Job Title" type ="jobTitle" {...field}/>
                 </FormControl>
@@ -67,8 +67,8 @@ export default function CreatePost() {
             name="companyName" 
             render={({ field }) => {
               return (
-              <FormItem>
-                <FormLabel className="text-black">Company</FormLabel>
+              <FormItem style={{ marginBottom: "13px"}}>
+                <FormLabel className="text-lg font-bold">Company</FormLabel>
                 <FormControl>
                   <Input className="text-black" placeholder="Company Name" type ="companyName" {...field}/>
                 </FormControl>
@@ -83,8 +83,8 @@ export default function CreatePost() {
             name="workPlaceType" 
             render={({ field }) => {
               return (
-              <FormItem>
-                <FormLabel className="text-black">Workplace Type</FormLabel>
+              <FormItem style={{ marginBottom: "13px"}}>
+                <FormLabel className="text-lg font-bold">Workplace Type</FormLabel>
                 <Select onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
@@ -108,8 +108,8 @@ export default function CreatePost() {
             name="jobType" 
             render={({ field }) => {
               return (
-              <FormItem>
-                <FormLabel className="text-black">Job Type</FormLabel>
+              <FormItem style={{ marginBottom: "13px"}}>
+                <FormLabel className="text-lg font-bold">Job Type</FormLabel>
                 <Select onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
@@ -134,8 +134,8 @@ export default function CreatePost() {
             name="jobLocation" 
             render={({ field }) => {
               return (
-              <FormItem>
-                <FormLabel className="text-black">Job Location</FormLabel>
+              <FormItem style={{ marginBottom: "13px"}}>
+                <FormLabel className="text-lg font-bold">Job Location</FormLabel>
                 <FormControl>
                   <Input className="text-black" placeholder="Job Location" type ="jobLocation" {...field}/>
                 </FormControl>
@@ -149,8 +149,8 @@ export default function CreatePost() {
             control={form.control}
             name="description"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-black">Job Description</FormLabel>
+              <FormItem style={{ marginBottom: "13px"}}>
+                <FormLabel className="text-lg font-bold">Job Description</FormLabel>
                 <Controller
                   control={form.control}
                   name="description"
