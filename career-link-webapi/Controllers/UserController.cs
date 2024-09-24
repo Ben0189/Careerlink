@@ -34,5 +34,31 @@ namespace Career_link_webapi.Controllers
                 return BadRequest(new { Message = result });
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserDTO userDTO)
+        {
+            var result = await _userService.UpdateUser(id, userDTO);
+            if (result == "User updated successfully.")
+            {
+            return Ok(new { Message = result });
+            }
+            else
+            {
+            return BadRequest(new { Message = result });
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var result = await _userService.DeleteUser(id);
+            if (result == "User deleted successfully.")
+            {
+            return Ok(new { Message = result });
+            }
+            else
+            {
+            return BadRequest(new { Message = result });
+            }
+        }
     }
 }

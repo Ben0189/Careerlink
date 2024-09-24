@@ -7,8 +7,8 @@ namespace Career_link_webapi.Services
 {
     public interface IUserService
     {
-        Task<List<UserDTO>> GetUsers(); 
-        Task<UserDTO> GetUserById(int id); 
+        Task<List<UserDTO>> GetUsers();
+        Task<UserDTO> GetUserById(int id);
         Task<string> CreateUser(UserDTO userDto);
     }
 
@@ -64,7 +64,7 @@ namespace Career_link_webapi.Services
             }
             catch (Exception ex)
             {
-                throw; 
+                throw;
             }
         }
         public async Task<string> CreateUser(UserDTO userDto)
@@ -88,7 +88,53 @@ namespace Career_link_webapi.Services
             }
             catch (Exception ex)
             {
-                 return $"An error occurred: {ex.Message}";
+                return $"An error occurred: {ex.Message}";
+            }
+        }
+        public async Task<string> UpdateUser(int id, UserDTO userDto)
+        {
+            try
+            {
+                var existingUser = await _dbContext.Users.FindAsync(id);
+                if (existingUser == null)
+                {
+                    return $"User with ID {id} not found.";
+                }
+
+                existingUser.FirstName = userDto.FirstName;
+                existingUser.LastName = userDto.LastName;
+                existingUser.EmailName = userDto.EmailName;
+                existingUser.ContactNumber = userDto.ContactNumber;
+                existingUser.UpdatedDate = DateTime.Now;
+
+                _dbContext.Users.Update(existingUser);
+                await _dbContext.SaveChangesAsync();
+
+                return "User updated successfully.";
+            }
+            catch (Exception ex)
+            {
+                return $"An error occurred: {ex.Message}";
+            }
+        }
+        public async Task<string> DeleteUser(int id)
+        {
+            try
+            {
+                var user = await _dbContext.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return $"User with ID {id} not found.";
+                }
+
+                _dbContext.Users.Remove(user);
+                await _dbContext.SaveChangesAsync();
+
+                return "User deleted successfully.";
+            }
+            catch (Exception ex)
+            {
+                return $"An error occurred: {ex.Message}";
             }
         }
     }

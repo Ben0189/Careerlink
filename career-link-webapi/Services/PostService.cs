@@ -59,5 +59,32 @@ namespace Career_link_webapi.Services
                 throw; 
             }
         }
+        public async Task UpdatePost(int id, PostDTO updatedPost)
+        {
+            var post = await _dbContext.Posts.FindAsync(id);
+
+            if (post == null)
+            {
+            throw new KeyNotFoundException($"Post with ID {id} not found.");
+            }
+
+            post.Description = updatedPost.Description;
+            post.UpdatedDate = DateTime.UtcNow;
+
+            _dbContext.Posts.Update(post);
+            await _dbContext.SaveChangesAsync();
+        }
+        public async Task DeletePost(int id)
+        {
+            var post = await _dbContext.Posts.FindAsync(id);
+
+            if (post == null)
+            {
+                throw new KeyNotFoundException($"Post with ID {id} not found.");
+            }
+
+            _dbContext.Posts.Remove(post);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
