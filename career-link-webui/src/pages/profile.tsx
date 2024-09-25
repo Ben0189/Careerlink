@@ -1,46 +1,54 @@
 "use client";
 import * as z from "zod";
-import { Controller, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form,FormControl,FormField,FormItem, FormLabel, FormMessage } from "@/components/form";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/components/select";
-
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import "react-quill/dist/quill.snow.css";
 import "../app/globals.css";
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const formSchema = z
   .object({
-    jobTitle: z.string(),
-    companyName: z.string(),    
-    workPlaceType: z.string().nonempty({ message: "Please select a workplace type" }),
-    jobLocation: z.string(),
-    jobType: z.string().nonempty({ message: "Please select a work type" }),
-    description: z.string().nonempty({ message: "Please provide a job description" }),
+    FullName: z.string(),
+    email: z.string(),    
+    phone: z.string(),
+    jobtype: z.string(),
+    jobskills: z.string(),
+    Bio: z.string()
   })
 
-export default function CreatePost() {
+export default function Profile() {
   const form = useForm <z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues:{
-      jobTitle: "",
-      companyName: "",
-      workPlaceType:"",
-      jobLocation: "",
-      jobType: "",
-      description: "",
+      FullName: "",
+      email: "",
+      phone:"",
+      jobtype: "",
+      jobskills: "",
+      Bio: "",
     },
   });
 
-  const handleSubmit =(values: z.infer<typeof formSchema>)=>{
-    console.log({values});
+  const handleSubmit =()=>{
+    console.log("Clicked Submit");
+  };
+  const router = useRouter();
+  const handleCancel=()=>{
+
+    router.push('/'); 
   };
 
   return(
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+       <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+          USER PROFILE 
+          
+        </p>
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(handleSubmit)} 
@@ -48,64 +56,60 @@ export default function CreatePost() {
         >
           <FormField 
             control={form.control} 
-            name="jobTitle" 
+            name="FullName" 
             render={({ field }) => {
               return (
               <FormItem>
-                <FormLabel className="text-black">Job Title</FormLabel>
-                <FormControl>
-                  <Input className="text-black" placeholder="Job Title" type ="jobTitle" {...field}/>
-                </FormControl>
+                <FormLabel className="text-black">Full Name</FormLabel>
+                
+                  <FormControl>
+                    <Input className="text-black" placeholder="Full Name" type="FullName" {...field}/>
+                  </FormControl>
+                
+                <FormMessage className="text-red-500"/>
+              </FormItem>
+            );
+            }}
+          />
+          <FormField 
+            control={form.control} 
+            name="email" 
+            render={({ field }) => {
+              return (
+              <FormItem>
+                
+                <FormLabel className="text-black">Email</FormLabel>
+                    <FormControl>
+                      <Input className="text-black" placeholder="Email" type ="email" {...field}/>
+                    </FormControl>      
                 <FormMessage className="text-red-500"/>
               </FormItem>
             );
             }}
           />
 
-          <FormField 
+<FormField 
             control={form.control} 
-            name="companyName" 
+            name="phone" 
             render={({ field }) => {
               return (
               <FormItem>
-                <FormLabel className="text-black">Company</FormLabel>
+                <FormLabel className="text-black mt-4">Phone</FormLabel>
+                
                 <FormControl>
-                  <Input className="text-black" placeholder="Company Name" type ="companyName" {...field}/>
+                  <Input className="text-black mt-4" placeholder="Mobile Phone" type ="phone" {...field}/>
                 </FormControl>
+                
+                
                 <FormMessage className="text-red-500"/>
               </FormItem>
             );
             }}
           />
 
-          <FormField 
+<FormField 
             control={form.control} 
-            name="workPlaceType" 
-            render={({ field }) => {
-              return (
-              <FormItem>
-                <FormLabel className="text-black">Workplace Type</FormLabel>
-                <Select onValueChange={field.onChange}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a workplace type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="bg-white bg-opacity-95">
-                  <SelectItem value="Full time" className="text-black">On site</SelectItem>
-                  <SelectItem value="Part time" className="text-black">Remote</SelectItem>
-                  <SelectItem value="Contract/Temp" className="text-black">Hybird</SelectItem>
-                </SelectContent>
-                </Select>
-                <FormMessage className="text-red-500"/>
-              </FormItem>
-            );
-            }}
-          />
-
-          <FormField 
-            control={form.control} 
-            name="jobType" 
+            name="jobtype" 
             render={({ field }) => {
               return (
               <FormItem>
@@ -113,7 +117,7 @@ export default function CreatePost() {
                 <Select onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a work type" />
+                    <SelectValue placeholder="Select a work type"  />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-white bg-opacity-95">
@@ -129,15 +133,15 @@ export default function CreatePost() {
             }}
           />
 
-          <FormField 
+<FormField 
             control={form.control} 
-            name="jobLocation" 
+            name="jobskills" 
             render={({ field }) => {
               return (
               <FormItem>
-                <FormLabel className="text-black">Job Location</FormLabel>
+                <FormLabel className="text-black">Job Skills</FormLabel>
                 <FormControl>
-                  <Input className="text-black" placeholder="Job Location" type ="jobLocation" {...field}/>
+                  <Input className="text-black" placeholder="Please list any programming languages" type ="jobskills" {...field}/>
                 </FormControl>
                 <FormMessage className="text-red-500"/>
               </FormItem>
@@ -145,33 +149,31 @@ export default function CreatePost() {
             }}
           />
 
-          <FormField
+<FormField
             control={form.control}
-            name="description"
+            name="Bio"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-black">Job Description</FormLabel>
-                <Controller
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <ReactQuill
-                      theme="snow"
-                      value={field.value}
-                      onChange={field.onChange}
-                      className="text-black"
-                    />
-                  )}
-                />
+                <FormLabel className="text-black">Bio</FormLabel>
+                <FormControl>
+                  <Input className="text-black" placeholder="Tell us about yourself" type ="jobskills" {...field}/>
+                </FormControl>
+                
                 <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
-
-          <Button type="submit" className="w-full text-black">Submit</Button>
+           <div className="flex space-x-4"> 
+            <Button type="submit" className="w-full md:w-auto">Submit</Button>
+            <Button type="button" className="w-full md:w-auto" onClick= {handleCancel}>
+              Cancel
+            </Button>
+      </div>
+         
         </form>
       </Form>
-
+            
     </main>
+    
   )
 }
