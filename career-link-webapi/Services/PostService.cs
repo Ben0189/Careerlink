@@ -24,7 +24,7 @@ namespace Career_link_webapi.Services
             return await _dbContext.Posts
                 .Select(x => new PostDTO
                 {
-                    UserId = x.UserId,
+                    UserId = x.UserId1,
                     Description = x.Description,
                     CreatedDate = x.CreatedDate,
                     UpdatedDate = x.UpdatedDate
@@ -40,7 +40,7 @@ namespace Career_link_webapi.Services
                     .Where(x => x.PostId == id)
                     .Select(x => new PostDTO
                     {
-                        UserId = x.UserId,
+                        UserId = x.UserId1,
                         Description = x.Description,
                         CreatedDate = x.CreatedDate,
                         UpdatedDate = x.UpdatedDate
