@@ -1,6 +1,0 @@
-@Career_link_webapi_HostAddress = http://localhost:5029
-
-GET {{Career_link_webapi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
