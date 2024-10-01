@@ -1,4 +1,5 @@
 ﻿using Career_link_webapi.Data;
+using Career_link_webapi.Data.Entities;
 using Career_link_webapi.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,14 +23,21 @@ namespace Career_link_webapi.Services
         public async Task<List<PostDTO>> GetPosts()
         {
             return await _dbContext.Posts
-                .Select(x => new PostDTO
-                {
-                    UserId = x.UserId1,
-                    Description = x.Description,
-                    CreatedDate = x.CreatedDate,
-                    UpdatedDate = x.UpdatedDate
-                })
-                .ToListAsync();
+                        .Include(x => x.User) 
+                        .Select(x => new PostDTO
+                        {
+                            PostId = x.PostId, 
+                            User = new UserDTO 
+                            {
+                                UserId = x.User.Id,
+                                UserName = x.User.UserName,
+                                Email = x.User.Email,
+                            },
+                            Description = x.Description,
+                            CreatedDate = x.CreatedDate,
+                            UpdatedDate = x.UpdatedDate
+                        })
+                        .ToListAsync();
         }
 
         public async Task<PostDTO> GetPostById(int id)
@@ -38,9 +46,15 @@ namespace Career_link_webapi.Services
             {
                 var post = await _dbContext.Posts
                     .Where(x => x.PostId == id)
+                    .Include(x => x.User)
                     .Select(x => new PostDTO
                     {
-                        UserId = x.UserId1,
+                        User = new UserDTO 
+                                    {
+                                        UserId = x.User.Id,
+                                        UserName = x.User.UserName,
+                                        Email = x.User.Email,
+                                    },
                         Description = x.Description,
                         CreatedDate = x.CreatedDate,
                         UpdatedDate = x.UpdatedDate
