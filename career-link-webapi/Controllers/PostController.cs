@@ -18,6 +18,7 @@ namespace Career_link_webapi.Controllers
         {
             return Ok(await _postService.GetPosts());
         }
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTaskByID(int id)
         {

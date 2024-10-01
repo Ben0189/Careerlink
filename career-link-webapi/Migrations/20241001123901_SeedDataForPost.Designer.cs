@@ -4,6 +4,7 @@ using Career_link_webapi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    partial class CareerLinkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241001123901_SeedDataForPost")]
+    partial class SeedDataForPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace Career_link_webapi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Post");
 
                     b.HasData(
                         new
@@ -152,7 +155,7 @@ namespace Career_link_webapi.Migrations
                         {
                             Id = "testuser",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8274cdd7-e0b1-4054-8341-589de04e38eb",
+                            ConcurrencyStamp = "95fb762f-5853-4626-be0a-75c62d793b07",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "predefineduser@example.com",
                             EmailConfirmed = true,
@@ -161,7 +164,7 @@ namespace Career_link_webapi.Migrations
                             NormalizedUserName = "PREDEFINEDUSER",
                             PasswordHash = "plaintextpassword",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ea8c5ca8-c493-44d6-a3bc-cc77f3220bd8",
+                            SecurityStamp = "e0356612-2a19-410e-b804-c65d7d335f88",
                             TwoFactorEnabled = false,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "predefineduser"

@@ -13,47 +13,52 @@ namespace Career_link_webapi.Data
         {
             base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<User>().HasData(new User
-                {
-                    Id = "1", // Use a fixed GUID or string ID
-                    UserName = "predefineduser",
-                    NormalizedUserName = "PREDEFINEDUSER",
-                    Email = "predefineduser@example.com",
-                    NormalizedEmail = "PREDEFINEDUSER@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = "plaintextpassword" // Password stored as plain text (not secure!)
-                });
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = "testuser", // Use a fixed GUID or string ID
+                UserName = "predefineduser",
+                NormalizedUserName = "PREDEFINEDUSER",
+                Email = "predefineduser@example.com",
+                NormalizedEmail = "PREDEFINEDUSER@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = "plaintextpassword" // Password stored as plain text (not secure!)
+            });
 
-                // You can also seed roles if necessary
-                modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
-                {
-                    Id = "1", // Use a fixed GUID or string ID
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                });
+            // You can also seed roles if necessary
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "testuser", // Use a fixed GUID or string ID
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            });
 
+            // Use fixed date values for CreatedDate and UpdatedDate
+            DateTime fixedDate = new DateTime(2023, 10, 1); // Example fixed date
+            
             modelBuilder.Entity<Post>().HasData(
                 new Post
                 {
                     PostId = 1,
-                    UserId1 = 1,
+                    UserId = "testuser",
                     Description = "Looking for a software engineering job.",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
+                    CreatedDate = fixedDate,
+                    UpdatedDate = fixedDate
                 },
                 new Post
                 {
                     PostId = 2,
-                    Description = "Excited about new opportunitÍies in data science.",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
+                    UserId = "testuser",
+                    Description = "Excited about new opportunities in data science.",
+                    CreatedDate = fixedDate,
+                    UpdatedDate = fixedDate
                 },
                 new Post
                 {
                     PostId = 3,
+                    UserId = "testuser",
                     Description = "Interested in remote work positions.",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
+                    CreatedDate = fixedDate,
+                    UpdatedDate = fixedDate
                 }
             );
         }
