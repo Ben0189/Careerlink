@@ -11,13 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostService, PostService>();
-builder.Services.AddScoped<IUserService, UserService>();
+// builder.Services.AddScoped<IUserService, UserService>();
 
 if (builder.Environment.IsDevelopment())
 {
     var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     builder.Services.AddDbContext<CareerLinkDbContext>(options => options.UseSqlServer(databaseConnectionString));
 }
+
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddEntityFrameworkStores<CareerLinkDbContext>();
 
 builder.Services.AddCors(options =>
 {
@@ -31,6 +34,7 @@ builder.Services.AddCors(options =>
 
 });
 var app = builder.Build();
+app.MapIdentityApi<User>();
 
 
 // Configure the HTTP request pipeline.
