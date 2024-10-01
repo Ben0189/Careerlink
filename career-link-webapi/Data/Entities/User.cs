@@ -1,24 +1,11 @@
 ﻿using Career_link_webapi.Data.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace Career_link_webapi.Data;
-public class User
+public class User : IdentityUser
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int UserId { get; set; }
-
-    public string FirstName { get; set; }
-
-    public string LastName { get; set; }
-
-    public string EmailName { get; set; }
-
-    public long ContactNumber { get; set; }
-
     public DateTime CreatedDate { get; set; }
-
     public DateTime UpdatedDate { get; set; }
-
     public ICollection<Post> Posts { get; set; }
 }
 
