@@ -3,22 +3,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Career_link_webapi.Migrations
 {
     /// <inheritdoc />
-    public partial class SetupUserIdentity : Migration
+    public partial class InitialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "UserId1",
-                table: "Posts",
-                type: "nvarchar(450)",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -166,20 +158,27 @@ namespace Career_link_webapi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Posts",
-                columns: new[] { "PostId", "CreatedDate", "Description", "UpdatedDate", "UserId", "UserId1" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "Post",
+                columns: table => new
                 {
-                    { 1, new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4730), "Looking for a software engineering job.", new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4760), 0, null },
-                    { 2, new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4760), "Excited about new opportunities in data science.", new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4770), 0, null },
-                    { 3, new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4770), "Interested in remote work positions.", new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4770), 0, null }
+                    PostId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Post", x => x.PostId);
+                    table.ForeignKey(
+                        name: "FK_Post_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserId1",
-                table: "Posts",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -220,21 +219,15 @@ namespace Career_link_webapi.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Posts_AspNetUsers_UserId1",
-                table: "Posts",
-                column: "UserId1",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id");
+            migrationBuilder.CreateIndex(
+                name: "IX_Post_UserId",
+                table: "Post",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Posts_AspNetUsers_UserId1",
-                table: "Posts");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -251,33 +244,13 @@ namespace Career_link_webapi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Post");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Posts_UserId1",
-                table: "Posts");
-
-            migrationBuilder.DeleteData(
-                table: "Posts",
-                keyColumn: "PostId",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Posts",
-                keyColumn: "PostId",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Posts",
-                keyColumn: "PostId",
-                keyValue: 3);
-
-            migrationBuilder.DropColumn(
-                name: "UserId1",
-                table: "Posts");
         }
     }
 }

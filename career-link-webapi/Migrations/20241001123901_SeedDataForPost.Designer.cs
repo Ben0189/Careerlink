@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    [Migration("20241001004139_SetupUserIdentity")]
-    partial class SetupUserIdentity
+    [Migration("20241001123901_SeedDataForPost")]
+    partial class SeedDataForPost
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,42 +43,40 @@ namespace Career_link_webapi.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Post");
 
                     b.HasData(
                         new
                         {
                             PostId = 1,
-                            CreatedDate = new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4730),
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Looking for a software engineering job.",
-                            UpdatedDate = new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4760),
-                            UserId = 0
+                            UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "testuser"
                         },
                         new
                         {
                             PostId = 2,
-                            CreatedDate = new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4760),
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Excited about new opportunities in data science.",
-                            UpdatedDate = new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4770),
-                            UserId = 0
+                            UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "testuser"
                         },
                         new
                         {
                             PostId = 3,
-                            CreatedDate = new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4770),
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Interested in remote work positions.",
-                            UpdatedDate = new DateTime(2024, 10, 1, 10, 41, 38, 895, DateTimeKind.Local).AddTicks(4770),
-                            UserId = 0
+                            UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "testuser"
                         });
                 });
 
@@ -151,6 +149,26 @@ namespace Career_link_webapi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "testuser",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95fb762f-5853-4626-be0a-75c62d793b07",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "predefineduser@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PREDEFINEDUSER@EXAMPLE.COM",
+                            NormalizedUserName = "PREDEFINEDUSER",
+                            PasswordHash = "plaintextpassword",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e0356612-2a19-410e-b804-c65d7d335f88",
+                            TwoFactorEnabled = false,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserName = "predefineduser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -178,6 +196,14 @@ namespace Career_link_webapi.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "testuser",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -290,7 +316,9 @@ namespace Career_link_webapi.Migrations
                 {
                     b.HasOne("Career_link_webapi.Data.User", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

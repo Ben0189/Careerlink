@@ -41,10 +41,8 @@ namespace Career_link_webapi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("UserId1")
-                        .HasColumnType("int");
 
                     b.HasKey("PostId");
 
@@ -59,7 +57,7 @@ namespace Career_link_webapi.Migrations
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Looking for a software engineering job.",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId1 = 1
+                            UserId = "testuser"
                         },
                         new
                         {
@@ -67,7 +65,7 @@ namespace Career_link_webapi.Migrations
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Excited about new opportunities in data science.",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId1 = 1
+                            UserId = "testuser"
                         },
                         new
                         {
@@ -75,7 +73,7 @@ namespace Career_link_webapi.Migrations
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Interested in remote work positions.",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId1 = 1
+                            UserId = "testuser"
                         });
                 });
 
@@ -152,9 +150,9 @@ namespace Career_link_webapi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
+                            Id = "testuser",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "120511b5-2390-4b3c-9c09-53fb56e0ac1e",
+                            ConcurrencyStamp = "8274cdd7-e0b1-4054-8341-589de04e38eb",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "predefineduser@example.com",
                             EmailConfirmed = true,
@@ -163,7 +161,7 @@ namespace Career_link_webapi.Migrations
                             NormalizedUserName = "PREDEFINEDUSER",
                             PasswordHash = "plaintextpassword",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "88a5d32b-8f46-48d6-8e28-6548c3440015",
+                            SecurityStamp = "ea8c5ca8-c493-44d6-a3bc-cc77f3220bd8",
                             TwoFactorEnabled = false,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "predefineduser"
@@ -199,7 +197,7 @@ namespace Career_link_webapi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
+                            Id = "testuser",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -313,9 +311,13 @@ namespace Career_link_webapi.Migrations
 
             modelBuilder.Entity("Career_link_webapi.Data.Entities.Post", b =>
                 {
-                    b.HasOne("Career_link_webapi.Data.User", null)
+                    b.HasOne("Career_link_webapi.Data.User", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
