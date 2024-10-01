@@ -32,30 +32,35 @@ namespace Career_link_webapi.Data
                     NormalizedName = "ADMIN"
                 });
 
-            modelBuilder.Entity<Post>().HasData(
-                new Post
-                {
-                    PostId = 1,
-                    UserId1 = 1,
-                    Description = "Looking for a software engineering job.",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
-                },
-                new Post
-                {
-                    PostId = 2,
-                    Description = "Excited about new opportunitÍies in data science.",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
-                },
-                new Post
-                {
-                    PostId = 3,
-                    Description = "Interested in remote work positions.",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now
-                }
-            );
+                // Use fixed date values for CreatedDate and UpdatedDate
+                    DateTime fixedDate = new DateTime(2023, 10, 1); // Example fixed date
+                    
+                    modelBuilder.Entity<Post>().HasData(
+                        new Post
+                        {
+                            PostId = 1,
+                            UserId1 = 1,
+                            Description = "Looking for a software engineering job.",
+                            CreatedDate = fixedDate,
+                            UpdatedDate = fixedDate
+                        },
+                        new Post
+                        {
+                            PostId = 2,
+                            UserId1 = 1,
+                            Description = "Excited about new opportunities in data science.",
+                            CreatedDate = fixedDate,
+                            UpdatedDate = fixedDate
+                        },
+                        new Post
+                        {
+                            PostId = 3,
+                            UserId1 = 1,
+                            Description = "Interested in remote work positions.",
+                            CreatedDate = fixedDate,
+                            UpdatedDate = fixedDate
+                        }
+                    );
         }
     }
 }
