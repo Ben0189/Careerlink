@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    [Migration("20241001124301_SeedDataForPsdad")]
-    partial class SeedDataForPsdad
+    [Migration("20241003093247_AddSkillsTable")]
+    partial class AddSkillsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,23 @@ namespace Career_link_webapi.Migrations
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "testuser"
                         });
+                });
+
+            modelBuilder.Entity("Career_link_webapi.Data.Entities.Skill", b =>
+                {
+                    b.Property<int>("SkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SkillId");
+
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Career_link_webapi.Data.User", b =>
@@ -155,7 +172,7 @@ namespace Career_link_webapi.Migrations
                         {
                             Id = "testuser",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8274cdd7-e0b1-4054-8341-589de04e38eb",
+                            ConcurrencyStamp = "8056274a-ff84-4c3c-b1de-0c6c48e03b0b",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "predefineduser@example.com",
                             EmailConfirmed = true,
@@ -164,7 +181,7 @@ namespace Career_link_webapi.Migrations
                             NormalizedUserName = "PREDEFINEDUSER",
                             PasswordHash = "plaintextpassword",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ea8c5ca8-c493-44d6-a3bc-cc77f3220bd8",
+                            SecurityStamp = "c3d64633-fb51-48f9-8828-b336f645749f",
                             TwoFactorEnabled = false,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "predefineduser"
@@ -312,6 +329,21 @@ namespace Career_link_webapi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PostSkill", b =>
+                {
+                    b.Property<int>("PostsPostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillsSkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostsPostId", "SkillsSkillId");
+
+                    b.HasIndex("SkillsSkillId");
+
+                    b.ToTable("PostSkill");
+                });
+
             modelBuilder.Entity("Career_link_webapi.Data.Entities.Post", b =>
                 {
                     b.HasOne("Career_link_webapi.Data.User", "User")
@@ -370,6 +402,21 @@ namespace Career_link_webapi.Migrations
                     b.HasOne("Career_link_webapi.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PostSkill", b =>
+                {
+                    b.HasOne("Career_link_webapi.Data.Entities.Post", null)
+                        .WithMany()
+                        .HasForeignKey("PostsPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Career_link_webapi.Data.Entities.Skill", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsSkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
