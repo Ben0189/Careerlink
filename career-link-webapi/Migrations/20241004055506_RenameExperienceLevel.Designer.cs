@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    [Migration("20241001123251_InitialIdentity")]
-    partial class InitialIdentity
+    [Migration("20241004055506_RenameExperienceLevel")]
+    partial class RenameExperienceLevel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,11 +47,60 @@ namespace Career_link_webapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("experienceLevel")
+                        .HasColumnType("int");
+
                     b.HasKey("PostId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            PostId = 1,
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Looking for a software engineering job.",
+                            UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "testuser",
+                            experienceLevel = 2
+                        },
+                        new
+                        {
+                            PostId = 2,
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Excited about new opportunities in data science.",
+                            UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "testuser",
+                            experienceLevel = 1
+                        },
+                        new
+                        {
+                            PostId = 3,
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Interested in remote work positions.",
+                            UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "testuser",
+                            experienceLevel = 3
+                        });
+                });
+
+            modelBuilder.Entity("Career_link_webapi.Data.Entities.Skill", b =>
+                {
+                    b.Property<int>("SkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SkillId");
+
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Career_link_webapi.Data.User", b =>
@@ -123,6 +172,26 @@ namespace Career_link_webapi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "testuser",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c56a3729-6b59-4546-b22a-1d05f7b9c97f",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "predefineduser@example.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PREDEFINEDUSER@EXAMPLE.COM",
+                            NormalizedUserName = "PREDEFINEDUSER",
+                            PasswordHash = "plaintextpassword",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "813d7233-98b7-4283-a079-cb1169dd6549",
+                            TwoFactorEnabled = false,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserName = "predefineduser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -150,6 +219,14 @@ namespace Career_link_webapi.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "testuser",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -258,6 +335,21 @@ namespace Career_link_webapi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PostSkill", b =>
+                {
+                    b.Property<int>("PostsPostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillsSkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostsPostId", "SkillsSkillId");
+
+                    b.HasIndex("SkillsSkillId");
+
+                    b.ToTable("PostSkill");
+                });
+
             modelBuilder.Entity("Career_link_webapi.Data.Entities.Post", b =>
                 {
                     b.HasOne("Career_link_webapi.Data.User", "User")
@@ -316,6 +408,21 @@ namespace Career_link_webapi.Migrations
                     b.HasOne("Career_link_webapi.Data.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PostSkill", b =>
+                {
+                    b.HasOne("Career_link_webapi.Data.Entities.Post", null)
+                        .WithMany()
+                        .HasForeignKey("PostsPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Career_link_webapi.Data.Entities.Skill", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsSkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

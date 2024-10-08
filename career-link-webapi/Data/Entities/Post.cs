@@ -13,6 +13,8 @@ public class Post
 
     public string Description { get; set; }
 
+    public int experienceLevel { get; set; }
+
     public DateTime CreatedDate { get; set; }
 
     public DateTime UpdatedDate { get; set; }
@@ -20,5 +22,7 @@ public class Post
     // Navigation property for the related user
     [ForeignKey("UserId")]
     public User User { get; set; }
+    public ICollection<Skill> Skills { get; set; } = new List<Skill>();
+
 }
 
