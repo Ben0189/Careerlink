@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.11"
+  },
+  "dependencies": {
+    "@radix-ui/react-primitive": "^2.0.0",
+    "@shadcn/ui": "^0.0.4"
+  }
+}
