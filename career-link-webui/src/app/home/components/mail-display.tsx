@@ -7,10 +7,10 @@ import {
   Trash2
 } from "lucide-react"
 import { Mail } from "../data"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/tooltip"
-import { Button } from "@/components/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar"
-import { Separator } from "@/components/separator"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Separator } from "@/components/ui/separator"
 import { format } from "date-fns"
 
 
