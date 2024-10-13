@@ -15,7 +15,7 @@ namespace Career_link_webapi.Controllers
             _postService = taskService;
         }
 
-        [HttpGet]
+        [HttpGet("allpost")]
         public async Task<IActionResult> GetAllTask()
         {
             return Ok(await _postService.GetPosts());
@@ -47,9 +47,9 @@ namespace Career_link_webapi.Controllers
             }
             try
             {
-                var createdPost = await _postService.CreatePost(postDto);
+                var createdPostId = await _postService.CreatePost(postDto);
 
-                return Ok(new { PostId = createdPost.PostId });
+                return Ok(new { PostId = createdPostId });
             }
             catch (Exception ex)
             {

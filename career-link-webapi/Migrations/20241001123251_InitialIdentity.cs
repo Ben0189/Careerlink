@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Career_link_webapi.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSkillsTable : Migration
+    public partial class InitialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,19 +50,6 @@ namespace Career_link_webapi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Skills",
-                columns: table => new
-                {
-                    SkillId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Skills", x => x.SkillId);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,7 +159,7 @@ namespace Career_link_webapi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "Post",
                 columns: table => new
                 {
                     PostId = table.Column<int>(type: "int", nullable: false)
@@ -186,57 +171,13 @@ namespace Career_link_webapi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.PostId);
+                    table.PrimaryKey("PK_Post", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_UserId",
+                        name: "FK_Post_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PostSkill",
-                columns: table => new
-                {
-                    PostsPostId = table.Column<int>(type: "int", nullable: false),
-                    SkillsSkillId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PostSkill", x => new { x.PostsPostId, x.SkillsSkillId });
-                    table.ForeignKey(
-                        name: "FK_PostSkill_Posts_PostsPostId",
-                        column: x => x.PostsPostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PostSkill_Skills_SkillsSkillId",
-                        column: x => x.SkillsSkillId,
-                        principalTable: "Skills",
-                        principalColumn: "SkillId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "testuser", null, "Admin", "ADMIN" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedDate", "UserName" },
-                values: new object[] { "testuser", 0, "8056274a-ff84-4c3c-b1de-0c6c48e03b0b", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "predefineduser@example.com", true, false, null, "PREDEFINEDUSER@EXAMPLE.COM", "PREDEFINEDUSER", "plaintextpassword", null, false, "c3d64633-fb51-48f9-8828-b336f645749f", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "predefineduser" });
-
-            migrationBuilder.InsertData(
-                table: "Posts",
-                columns: new[] { "PostId", "CreatedDate", "Description", "UpdatedDate", "UserId" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Looking for a software engineering job.", new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "testuser" },
-                    { 2, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Excited about new opportunities in data science.", new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "testuser" },
-                    { 3, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Interested in remote work positions.", new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "testuser" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -279,14 +220,9 @@ namespace Career_link_webapi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserId",
-                table: "Posts",
+                name: "IX_Post_UserId",
+                table: "Post",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PostSkill_SkillsSkillId",
-                table: "PostSkill",
-                column: "SkillsSkillId");
         }
 
         /// <inheritdoc />
@@ -308,16 +244,10 @@ namespace Career_link_webapi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "PostSkill");
+                name: "Post");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Posts");
-
-            migrationBuilder.DropTable(
-                name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
