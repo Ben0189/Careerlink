@@ -16,11 +16,11 @@ interface Candidate {
   phone: string
 }
 
-interface SidebarProps {
+interface SidemenuProps {
   candidate: Candidate | null
 }
 
-export default function Sidemenu({ candidate }: SidebarProps) {
+export default function Sidemenu({ candidate }: SidemenuProps) {
   const [message, setMessage] = useState('')
 
   if (!candidate) {
@@ -28,7 +28,7 @@ export default function Sidemenu({ candidate }: SidebarProps) {
       <div className="w-1/3 p-4 border-l">
         <Card>
           <CardContent className="pt-6">
-            <p className="text-center text-gray-500">Select a candidate to view details</p>
+            <p className="text-center text-black">Select a candidate to view details</p>
           </CardContent>
         </Card>
       </div>
@@ -42,7 +42,7 @@ export default function Sidemenu({ candidate }: SidebarProps) {
 
   return (
     <div className="w-1/3 p-4 border-l space-y-4">
-      <Card>
+      <Card className="text-black">
         <CardHeader>
           <CardTitle className="flex items-center gap-4">
             <Avatar>
@@ -50,42 +50,41 @@ export default function Sidemenu({ candidate }: SidebarProps) {
               <AvatarFallback>{candidate.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
             <div>
-              <h2 className="text-xl font-bold">{candidate.name}</h2>
-              <p className="text-sm text-muted-foreground">{candidate.jobTitle}</p>
+              <h2 className="text-xl font-bold text-black">{candidate.name}</h2>
+              <p className="text-sm text-black">{candidate.jobTitle}</p>
             </div>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-1">Contact Information</h4>
-            <p className="text-sm">{candidate.email}</p>
-            <p className="text-sm">{candidate.phone}</p>
+            <h4 className="font-semibold mb-1 text-black">Contact Information</h4>
+            <p className="text-sm text-black">{candidate.email}</p>
+            <p className="text-sm text-black">{candidate.phone}</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-1">Experience</h4>
-            <p className="text-sm">{candidate.experience}</p>
+            <h4 className="font-semibold mb-1 text-black">Experience</h4>
+            <p className="text-sm text-black">{candidate.experience}</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-1">Resume AI Summary</h4>
-            <p className="text-sm">AI-generated summary of candidate's qualifications and experience.</p>
+            <h4 className="font-semibold mb-1 text-black">Resume AI Summary</h4>
+            <p className="text-sm text-black">AI-generated summary of candidate's qualifications and experience.</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-1">Resume</h4>
-            <Button variant="outline" size="sm">Download Resume</Button>
+            <h4 className="font-semibold mb-1 text-black">Resume</h4>
+            <Button variant="outline" size="sm" className="text-black border-black hover:bg-gray-100">Download Resume</Button>
           </div>
           <div>
-            <h4 className="font-semibold mb-1">Send Message</h4>
+            <h4 className="font-semibold mb-1 text-black">Send Message</h4>
             <Textarea
               placeholder="Type your message here..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="min-h-[100px] mb-2"
+              className="min-h-[100px] mb-2 text-black"
             />
-            <Button onClick={handleSendMessage}>Send Message</Button>
+            <Button onClick={handleSendMessage} className="text-white bg-black hover:bg-gray-800">Send Message</Button>
           </div>
         </CardContent>
       </Card>
     </div>
   )
 }
-

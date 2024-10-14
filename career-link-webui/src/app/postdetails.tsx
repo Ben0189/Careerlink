@@ -1,10 +1,10 @@
 'use client'
 
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
-import { useState, useEffect } from "react"
-import Sidemenu from "@/components/sidemenu"
+import { Textarea } from "@/components/ui/textarea"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface Candidate {
   id: string
@@ -16,80 +16,75 @@ interface Candidate {
   phone: string
 }
 
-const candidates: Candidate[] = [
-  {
-    id: "1",
-    name: "John Wick",
-    jobTitle: "Shooting coach",
-    experience: "Former Special Forces operative with extensive combat experience, seeking a shooting coach role to train precision and tactical skills.",
-    tags: ["Casual", "Weekend"],
-    email: "john.wick@example.com",
-    phone: "123-456-7890"
-  },
-  {
-    id: "2",
-    name: "Ji Feng",
-    jobTitle: "Game developer",
-    experience: "Aspiring game developer with hands-on experience in Unreal Engine 5, Unity, C++, and 3D modeling; eager to learn and grow.",
-    tags: ["Intern", "UE5", "C#"],
-    email: "ji.feng@example.com",
-    phone: "098-765-4321"
-  }
-]
+interface SidebarProps {
+  candidate: Candidate | null
+}
 
-export default function ListofPost() {
-    const [searchText, setSearchText] = useState("")
-    const [filteredCandidates, setFilteredCandidates] = useState<Candidate[]>(candidates)
-    const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null)
+export function Sidebar({ candidate }: SidebarProps) {
+  const [message, setMessage] = useState('')
 
-    function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value
-        setSearchText(value)
-    }
-
-    useEffect(() => {
-        const filtered = candidates.filter(candidate =>
-            candidate.name.toLowerCase().includes(searchText.toLowerCase())
-        )
-        setFilteredCandidates(filtered)
-    }, [searchText])
-
+  if (!candidate) {
     return (
-        <div className="flex w-full max-w-6xl mx-auto p-4 space-x-4">
-          <div className="w-2/3 space-y-4">
-            <div className="relative">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
-              <Input 
-                onChange={handleSearch} 
-                value={searchText}
-                placeholder="Search by name" 
-                className="pl-8 text-black" 
-              />
-            </div>
-            <h2 className="text-2xl font-bold text-black">Candidates Picked For you</h2>
-            <div className="space-y-4">
-              {filteredCandidates.map((candidate) => (
-                <div key={candidate.id} className="border rounded-lg p-4 space-y-2">
-                  <h3 
-                    className="font-semibold text-black cursor-pointer hover:underline"
-                    onClick={() => setSelectedCandidate(candidate)}
-                  >
-                    {candidate.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">{candidate.jobTitle}</p>
-                  <p className="text-sm text-black">{candidate.experience}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {candidate.tags.map((tag) => (
-                      <Button key={tag} variant="outline" size="sm" className="text-black border-black hover:bg-gray-100">
-                        {tag}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <Sidemenu candidate={selectedCandidate} />
-        </div>
+      <div className="w-1/3 p-4 border-l">
+        <Card>
+          <CardContent className="pt-6">
+            <p className="text-center text-black">Select a candidate to view details</p>
+          </CardContent>
+        </Card>
+      </div>
     )
+  }
+
+  const handleSendMessage = () => {
+    console.log(`Sending message to ${candidate.name}: ${message}`)
+    setMessage('')
+  }
+
+  return (
+    <div className="w-1/3 p-4 border-l space-y-4">
+      <Card className="text-black">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-4">
+            <Avatar>
+              <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${candidate.name}`} />
+              <AvatarFallback>{candidate.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+            </Avatar>
+            <div>
+              <h2 className="text-xl font-bold text-black">{candidate.name}</h2>
+              <p className="text-sm text-black">{candidate.jobTitle}</p>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <h4 className="font-semibold mb-1 text-black">Contact Information</h4>
+            <p className="text-sm text-black">{candidate.email}</p>
+            <p className="text-sm text-black">{candidate.phone}</p>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-1 text-black">Experience</h4>
+            <p className="text-sm text-black">{candidate.experience}</p>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-1 text-black">Resume AI Summary</h4>
+            <p className="text-sm text-black">AI-generated summary of candidate's qualifications and experience.</p>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-1 text-black">Resume</h4>
+            <Button variant="outline" size="sm" className="text-black border-black hover:bg-gray-100">Download Resume</Button>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-1 text-black">Send Message</h4>
+            <Textarea
+              placeholder="Type your message here..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="min-h-[100px] mb-2 text-black"
+            />
+            <Button onClick={handleSendMessage} className="text-white bg-black hover:bg-gray-800">Send Message</Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
 }
