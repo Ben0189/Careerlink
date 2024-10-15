@@ -2,6 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Regular (400) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-Regular.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-Regular.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Bold (700) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-Bold.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-Bold.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Light (300) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-Light.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-Light.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Medium (500) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-Medium.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-Medium.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* SemiBold (600) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-SemiBold.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-SemiBold.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Thin (100) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-Thin.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-Thin.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* ExtraBold (800) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-ExtraBold.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-ExtraBold.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Black (900) */
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/font/Geist/webfonts/Geist-Black.woff2') format('woff2'),
+       url('/font/Geist/ttf/Geist-Black.ttf') format('truetype'),
+       url('/font/Geist/otf/Geist-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.font-sans {
+  font-family: 'GeistSans', sans-serif;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,8 +101,9 @@
 }
 
 body {
-  color: black;
-  font-family: 'Arial', sans-serif;
+  font-family: 'GeistSans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @layer utilities {
