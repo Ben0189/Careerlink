@@ -9,15 +9,7 @@ const NavigationBar: React.FC = () => {
           <Button variant="ghost" className="justify-start text-white hover:bg-blue-700 w-full">
             Explore
           </Button>
-          <Button variant="ghost" className="justify-start text-white hover:bg-blue-700 w-full">
-            Booked
-          </Button>
-          <Button variant="ghost" className="justify-start text-white hover:bg-blue-700 w-full">
-            Previous booking
-          </Button>
-          <Button variant="ghost" className="justify-start text-white hover:bg-blue-700 w-full">
-            Make a booking
-          </Button>
+          
         </div>
       </nav>
     );

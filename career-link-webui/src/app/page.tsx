@@ -1,6 +1,6 @@
 import Image from "next/image";
 import NavigationBar from "./navbar";
-import ListofPost from "./listofpost"
+import ListofPost from "./list-of-post"
 import { useState } from "react";
 
 export default function Home() {
