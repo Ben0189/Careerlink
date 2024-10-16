@@ -3,8 +3,8 @@ import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
 import { Mail } from "../data"
 import { useMail } from "../use-mail"
-import { ScrollArea } from "@/components/scroll-area"
-import { Badge } from "@/components/badge"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Badge } from "@/components/ui/badge"
 import { formatDistanceToNow } from "date-fns"
 
 

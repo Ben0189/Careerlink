@@ -22,11 +22,11 @@ import { Nav } from "./nav"
 import { AccountSwitcher } from "./account-switcher"
 import { MailList } from "./mail-list"
 import { MailDisplay } from "./mail-display"
-import { TooltipProvider } from "@/components/tooltip"
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/resizable"
-import { Separator } from "@/components/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/tabs"
-import { Input } from "@/components/input"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
+import { Separator } from "@/components/ui/separator"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Input } from "@/components/ui/input"
 
 interface MailProps {
   accounts: {
