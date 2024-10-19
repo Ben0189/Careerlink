@@ -1,11 +1,16 @@
 'use client'
 import { useState } from "react";
+import axios from "axios";
 
 interface PostDTO {
     userId: number;
+    userName: string;
+    email: string;
+    phoneNumber: string;
     description: string;
+    skillNames: string[];
     createdDate: Date;
-    updatedDate: Date;
+    // updatedDate: Date;
 }
 
 export default function Home() {
@@ -16,7 +21,7 @@ export default function Home() {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/Post/allpost`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Post/allPost`);
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }

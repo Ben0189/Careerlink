@@ -10,8 +10,8 @@ interface Candidate {
   id: string
   name: string
   jobTitle: string
-  experience: string
-  tags: string[]
+  description: string
+  skillName: string[]
   email: string
   phone: string
 }
@@ -62,8 +62,8 @@ export default function Sidemenu({ candidate }: SidemenuProps) {
             <p className="text-sm text-black">{candidate.phone}</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-1 text-black">Experience</h4>
-            <p className="text-sm text-black">{candidate.experience}</p>
+            <h4 className="font-semibold mb-1 text-black">Description</h4>
+            <p className="text-sm text-black">{candidate.description}</p>
           </div>
           <div>
             <h4 className="font-semibold mb-1 text-black">Resume AI Summary</h4>
