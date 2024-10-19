@@ -11,6 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostService, PostService>();
+<<<<<<< Updated upstream
+=======
+builder.Services.AddScoped<ISkillService, SkillService>();
+>>>>>>> Stashed changes
 // builder.Services.AddScoped<IUserService, UserService>();
 
 if (builder.Environment.IsDevelopment())

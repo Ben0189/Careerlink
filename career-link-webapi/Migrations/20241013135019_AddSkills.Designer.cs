@@ -4,6 +4,7 @@ using Career_link_webapi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    partial class CareerLinkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241013135019_AddSkills")]
+    partial class AddSkills
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,12 +46,9 @@ namespace Career_link_webapi.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-<<<<<<< Updated upstream
-=======
 
                     b.Property<int>("experienceLevel")
                         .HasColumnType("int");
->>>>>>> Stashed changes
 
                     b.HasKey("PostId");
 
@@ -63,12 +63,8 @@ namespace Career_link_webapi.Migrations
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Looking for a software engineering job.",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-<<<<<<< Updated upstream
-                            UserId = "testuser"
-=======
                             UserId = "testuser",
                             experienceLevel = 2
->>>>>>> Stashed changes
                         },
                         new
                         {
@@ -76,12 +72,8 @@ namespace Career_link_webapi.Migrations
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Excited about new opportunities in data science.",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-<<<<<<< Updated upstream
-                            UserId = "testuser"
-=======
                             UserId = "testuser",
                             experienceLevel = 1
->>>>>>> Stashed changes
                         },
                         new
                         {
@@ -89,12 +81,8 @@ namespace Career_link_webapi.Migrations
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Interested in remote work positions.",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-<<<<<<< Updated upstream
-                            UserId = "testuser"
-=======
                             UserId = "testuser",
                             experienceLevel = 3
->>>>>>> Stashed changes
                         });
                 });
 
@@ -190,11 +178,7 @@ namespace Career_link_webapi.Migrations
                         {
                             Id = "testuser",
                             AccessFailedCount = 0,
-<<<<<<< Updated upstream
-                            ConcurrencyStamp = "8274cdd7-e0b1-4054-8341-589de04e38eb",
-=======
                             ConcurrencyStamp = "201f588d-a5aa-4cf5-bb17-e55db39de7e2",
->>>>>>> Stashed changes
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "predefineduser@example.com",
                             EmailConfirmed = true,
@@ -203,11 +187,7 @@ namespace Career_link_webapi.Migrations
                             NormalizedUserName = "PREDEFINEDUSER",
                             PasswordHash = "plaintextpassword",
                             PhoneNumberConfirmed = false,
-<<<<<<< Updated upstream
-                            SecurityStamp = "ea8c5ca8-c493-44d6-a3bc-cc77f3220bd8",
-=======
                             SecurityStamp = "e5c8c1c9-623c-458d-82e8-fa5350310058",
->>>>>>> Stashed changes
                             TwoFactorEnabled = false,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "predefineduser"
@@ -355,8 +335,6 @@ namespace Career_link_webapi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-<<<<<<< Updated upstream
-=======
             modelBuilder.Entity("PostSkill", b =>
                 {
                     b.Property<int>("PostsPostId")
@@ -372,7 +350,6 @@ namespace Career_link_webapi.Migrations
                     b.ToTable("PostSkill");
                 });
 
->>>>>>> Stashed changes
             modelBuilder.Entity("Career_link_webapi.Data.Entities.Post", b =>
                 {
                     b.HasOne("Career_link_webapi.Data.User", "User")
@@ -435,8 +412,6 @@ namespace Career_link_webapi.Migrations
                         .IsRequired();
                 });
 
-<<<<<<< Updated upstream
-=======
             modelBuilder.Entity("PostSkill", b =>
                 {
                     b.HasOne("Career_link_webapi.Data.Entities.Post", null)
@@ -452,7 +427,6 @@ namespace Career_link_webapi.Migrations
                         .IsRequired();
                 });
 
->>>>>>> Stashed changes
             modelBuilder.Entity("Career_link_webapi.Data.User", b =>
                 {
                     b.Navigation("Posts");

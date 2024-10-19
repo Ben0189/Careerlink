@@ -9,6 +9,7 @@ namespace Career_link_webapi.Data
     {
         public CareerLinkDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Skill> Skills { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -24,7 +25,10 @@ namespace Career_link_webapi.Data
                 PasswordHash = "plaintextpassword" // Password stored as plain text (not secure!)
             });
 
+<<<<<<< Updated upstream
             // You can also seed roles if necessary
+=======
+>>>>>>> Stashed changes
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = "testuser", // Use a fixed GUID or string ID
@@ -32,7 +36,10 @@ namespace Career_link_webapi.Data
                 NormalizedName = "ADMIN"
             });
 
+<<<<<<< Updated upstream
             // Use fixed date values for CreatedDate and UpdatedDate
+=======
+>>>>>>> Stashed changes
             DateTime fixedDate = new DateTime(2023, 10, 1); // Example fixed date
             
             modelBuilder.Entity<Post>().HasData(
@@ -40,6 +47,10 @@ namespace Career_link_webapi.Data
                 {
                     PostId = 1,
                     UserId = "testuser",
+<<<<<<< Updated upstream
+=======
+                    experienceLevel = 2,
+>>>>>>> Stashed changes
                     Description = "Looking for a software engineering job.",
                     CreatedDate = fixedDate,
                     UpdatedDate = fixedDate
@@ -48,6 +59,10 @@ namespace Career_link_webapi.Data
                 {
                     PostId = 2,
                     UserId = "testuser",
+<<<<<<< Updated upstream
+=======
+                    experienceLevel=1,
+>>>>>>> Stashed changes
                     Description = "Excited about new opportunities in data science.",
                     CreatedDate = fixedDate,
                     UpdatedDate = fixedDate
@@ -56,6 +71,10 @@ namespace Career_link_webapi.Data
                 {
                     PostId = 3,
                     UserId = "testuser",
+<<<<<<< Updated upstream
+=======
+                    experienceLevel=3,
+>>>>>>> Stashed changes
                     Description = "Interested in remote work positions.",
                     CreatedDate = fixedDate,
                     UpdatedDate = fixedDate
