@@ -1,7 +1,5 @@
 "use client";
-import * as z from "zod";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,16 +9,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import {
   Select,
+  SelectContent,
+  SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectItem,
-  SelectContent,
 } from "@/components/ui/select";
-import NavigationBar from '../navbar';
+import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 const formSchema = z.object({
   jobTitle: z.string(),
@@ -54,7 +53,6 @@ export default function CreatePost() {
 
   return (
     <>
-    <NavigationBar /> {/* NavigationBar 放在这里 */}
     <main className="flex min-h-screen flex-col items-center justify-between p-12 bg-gray-100">
       {/* Overall form container with border and shadow */}
       <Form {...form}>

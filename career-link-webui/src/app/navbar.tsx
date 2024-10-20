@@ -15,7 +15,7 @@ const NavigationBar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 bottom-0 p-4 bg-blue-600 w-64 text-white overflow-y-auto flex flex-col">
+    <nav className="p-4 bg-blue-600 w-64 text-white">
       <h1 className="text-2xl font-bold mb-6 cursor-pointer" onClick={() => router.push('/')}>
         Career Link
       </h1>

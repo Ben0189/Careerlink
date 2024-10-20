@@ -1,9 +1,5 @@
 "use client";
-import * as z from "zod";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,8 +9,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import NavigationBar from "../navbar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 // Updated validation schema with firstName and lastName
 const registerSchema = z
@@ -102,7 +101,6 @@ export default function Register() {
 
   return (
     <>
-      <NavigationBar />
       <main className="flex min-h-screen flex-col items-center justify-center p-12 bg-gray-100">
         <Form {...form}>
           <form

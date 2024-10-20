@@ -77,7 +77,6 @@ export default function Login() {
 
   return (
     <>
-      <NavigationBar />
       <main className="flex min-h-screen flex-col items-center justify-center p-12 bg-gray-100">
         <Form {...form}>
           <form
