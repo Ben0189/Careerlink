@@ -4,6 +4,7 @@ using Career_link_webapi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    partial class CareerLinkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241020110009_UpdateUserColumn")]
+    partial class UpdateUserColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,9 +129,6 @@ namespace Career_link_webapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsRecruiter")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -186,19 +186,18 @@ namespace Career_link_webapi.Migrations
                         {
                             Id = "testuser",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "87e95b48-bfb5-4833-a938-6c6228b09213",
+                            ConcurrencyStamp = "c68eb77f-9b7d-4eda-ba0a-2d13365148b7",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "predefineduser@example.com",
                             EmailConfirmed = true,
                             FirstName = "TestFirstName",
-                            IsRecruiter = true,
                             LastName = "TestLastName",
                             LockoutEnabled = false,
                             NormalizedEmail = "PREDEFINEDUSER@EXAMPLE.COM",
                             NormalizedUserName = "PREDEFINEDUSER",
                             PasswordHash = "plaintextpassword",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "60400758-cc65-43b5-bda0-5c794c8f7b2c",
+                            SecurityStamp = "000fabfd-e360-4538-ae98-b9affb44dde5",
                             TwoFactorEnabled = false,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "predefineduser"
