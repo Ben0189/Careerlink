@@ -3,16 +3,16 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../context/AuthContext'; // 引入 useAuth
+import { useAuth } from '../context/AuthContext';
 import Link from 'next/link';
 
 const NavigationBar: React.FC = () => {
   const router = useRouter();
-  const { isAuthenticated, user, logout } = useAuth(); // 获取登录状态、用户信息和登出方法
+  const { isAuthenticated, user, logout } = useAuth(); 
 
   const handleLogout = () => {
     logout();
-    router.push('/login'); // 重定向到登录页面
+    router.push('/login');
   };
 
   return (
@@ -40,6 +40,25 @@ const NavigationBar: React.FC = () => {
             <span>Create Post</span>
           </Link>
         </Button>
+
+        <Button
+          variant="ghost"
+          className="justify-start text-white hover:bg-blue-700 w-full"
+        >
+          <Link href="/profile">
+            <span>Profile</span>
+          </Link>
+        </Button>
+
+        <Button
+          variant="ghost"
+          className="justify-start text-white hover:bg-blue-700 w-full"
+        >
+          <Link href="/find-candidate">
+            <span>Find Candidate</span>
+          </Link>
+        </Button>
+
       </div>
 
       <div className="mt-auto space-y-2 mb-4">

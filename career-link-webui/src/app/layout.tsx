@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className="flex">
         <AuthProvider>
         <NavigationBar/>
-          <main className="flex min-h-screen flex-col items-center justify-between p-24 w-full">          
+          <main className="flex min-h-screen flex-col items-center p-24 w-full">          
             {children}
           </main>
         </AuthProvider>
