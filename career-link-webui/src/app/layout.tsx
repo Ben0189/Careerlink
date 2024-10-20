@@ -18,10 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="flex">
         <AuthProvider>
         <NavigationBar/>
-          {children}
+          <main className="w-full">          
+            {children}
+          </main>
         </AuthProvider>
       </body>
     </html>
