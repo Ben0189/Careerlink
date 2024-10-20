@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext'; // 引入 useAuth
+import Link from 'next/link';
 
 const NavigationBar: React.FC = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const NavigationBar: React.FC = () => {
   };
 
   return (
-    <nav className="p-4 bg-blue-600 w-64 text-white">
+    <nav className="flex-col p-4 bg-blue-600 w-64 text-white">
       <h1 className="text-2xl font-bold mb-6 cursor-pointer" onClick={() => router.push('/')}>
         Career Link
       </h1>
@@ -24,20 +25,23 @@ const NavigationBar: React.FC = () => {
           <p className="text-lg">Welcome, {user}</p>
         </div>
       )}
+
       <div className="space-y-2">
         <Button variant="ghost" className="justify-start text-white hover:bg-blue-700 w-full">
-          Explore
+          <Link href="/listOfPost">
+            <span>Explore</span>
+          </Link>
         </Button>
         <Button
           variant="ghost"
           className="justify-start text-white hover:bg-blue-700 w-full"
-          onClick={() => router.push('/createPost')}
         >
-          Create Post
+          <Link href="/createPost">
+            <span>Create Post</span>
+          </Link>
         </Button>
       </div>
 
-      {/* Bottom Buttons */}
       <div className="mt-auto space-y-2 mb-4">
         {isAuthenticated ? (
           <Button
@@ -59,9 +63,10 @@ const NavigationBar: React.FC = () => {
             <Button
               variant="ghost"
               className="justify-start text-white hover:bg-blue-700 w-full"
-              onClick={() => router.push('/register')}
             >
-              Register
+              <Link href="/createPost">
+                <span>Register</span>
+              </Link>
             </Button>
           </>
         )}

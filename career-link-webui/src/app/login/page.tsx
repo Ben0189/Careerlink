@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import NavigationBar from '../navbar';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'; // useAuth
@@ -77,7 +76,6 @@ export default function Login() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-center p-12 bg-gray-100">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
@@ -138,7 +136,6 @@ export default function Login() {
             </div>
           </form>
         </Form>
-      </main>
     </>
   );
 }

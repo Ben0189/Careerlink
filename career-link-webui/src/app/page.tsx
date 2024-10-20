@@ -3,9 +3,7 @@ import ListofPost from "./list-of-post";
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-          <ListofPost/>
-      </main>
+      <p>Welcome to the Home page TODO : Please design the home page </p>
     </>
   );
 }
