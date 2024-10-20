@@ -1,7 +1,4 @@
-import Image from "next/image";
-import NavigationBar from "./navbar";
-import ListofPost from "./list-of-post"
-import { useState } from "react";
+import ListofPost from "./list-of-post";
 
 export default function Home() {
   return (
