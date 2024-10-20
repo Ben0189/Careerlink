@@ -103,11 +103,10 @@ export default function FindCandidate() {
     }
 
     setSearchText("");
-    console.log(candidates)
   };
   return (
     <>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <ListofPost
           candidates={candidates}
