@@ -24,7 +24,8 @@ namespace Career_link_webapi.Data
                 EmailConfirmed = true,
                 PasswordHash = "plaintextpassword", // Password stored as plain text (not secure!)
                 FirstName = "TestFirstName",
-                LastName = "TestLastName"
+                LastName = "TestLastName",
+                IsRecruiter = true
             });
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole

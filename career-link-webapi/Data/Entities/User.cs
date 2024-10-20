@@ -9,6 +9,7 @@ public class User : IdentityUser
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
     public ICollection<Post> Posts { get; set; }
+    public bool IsRecruiter { get; set; }
 }
 
 
