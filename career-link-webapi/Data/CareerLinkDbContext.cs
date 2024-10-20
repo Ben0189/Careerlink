@@ -22,7 +22,10 @@ namespace Career_link_webapi.Data
                 Email = "predefineduser@example.com",
                 NormalizedEmail = "PREDEFINEDUSER@EXAMPLE.COM",
                 EmailConfirmed = true,
-                PasswordHash = "plaintextpassword" // Password stored as plain text (not secure!)
+                PasswordHash = "plaintextpassword", // Password stored as plain text (not secure!)
+                FirstName = "TestFirstName",
+                LastName = "TestLastName",
+                IsRecruiter = true
             });
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
