@@ -1,11 +1,11 @@
-'use client'
+"use client";
 import { useState } from "react";
 
 interface PostDTO {
-    userId: number;
-    description: string;
-    createdDate: Date;
-    updatedDate: Date;
+  userId: number;
+  description: string;
+  createdDate: Date;
+  updatedDate: Date;
 }
 
 export default function Home() {
@@ -16,7 +16,9 @@ export default function Home() {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/Post/allpost`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/Post/allpost`,
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }
