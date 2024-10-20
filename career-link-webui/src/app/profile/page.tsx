@@ -9,7 +9,7 @@ import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import "react-quill/dist/quill.snow.css";
-import "../app/globals.css";
+import "@/app/globals.css";
 
 const formSchema = z
   .object({
