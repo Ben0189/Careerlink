@@ -36,7 +36,7 @@ const NavigationBar: React.FC = () => {
           variant="ghost"
           className="justify-start text-white hover:bg-blue-700 w-full"
         >
-          <Link href="/createPost">
+          <Link href="/create-post">
             <span>Create Post</span>
           </Link>
         </Button>

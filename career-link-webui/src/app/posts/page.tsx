@@ -17,7 +17,6 @@ export default function Home() {
   const [posts, setPosts] = useState<PostDTO[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to fetch data from backend
   const fetchPosts = async () => {
     setLoading(true);
     try {

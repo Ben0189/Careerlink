@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext'; // useAuth
+import { useAuth } from '../../context/AuthContext';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid e-mail address" }),
@@ -23,7 +23,7 @@ const loginSchema = z.object({
 
 export default function Login() {
   const router = useRouter();
-  const { login } = useAuth(); // login
+  const { login } = useAuth(); 
   const [errorMessage, setErrorMessage] = useState("");
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -50,6 +50,12 @@ export default function Login() {
 
       if (response.ok) {
         const data = await response.json();
+        localStorage.setItem("firstName", data.firstName);  
+        localStorage.setItem("lastName", data.lastName);
+        localStorage.setItem("email", values.email);
+        localStorage.setItem("phone", data.phone);
+        localStorage.setItem("role", data.role);
+        localStorage.setItem("userId", data.userId);
         login(values.email);
         setTimeout(() => {
           router.push("/");
@@ -83,7 +89,6 @@ export default function Login() {
           >
             <h2 className="text-2xl font-semibold text-center text-gray-800">Login</h2>
 
-            {/* Display error messages */}
             {errorMessage && (
               <div className="text-red-600 text-center mb-4">{errorMessage}</div>
             )}
