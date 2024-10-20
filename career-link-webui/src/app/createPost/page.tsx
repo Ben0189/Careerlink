@@ -53,7 +53,6 @@ export default function CreatePost() {
 
   return (
     <>
-    <main className="flex min-h-screen flex-col items-center justify-between p-12 bg-gray-100">
       {/* Overall form container with border and shadow */}
       <Form {...form}>
         <form
@@ -221,7 +220,6 @@ export default function CreatePost() {
           </div>
         </form>
       </Form>
-    </main>
     </>
   );
 }
