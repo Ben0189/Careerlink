@@ -1,8 +1,7 @@
 
-"use client"; // 添加这一行
+"use client"; 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// 定义 AuthContext 的类型
 interface AuthContextType {
   isAuthenticated: boolean;
   user: string | null;
@@ -10,16 +9,13 @@ interface AuthContextType {
   logout: () => void;
 }
 
-// 创建一个 AuthContext
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// AuthProvider 组件：用于在整个应用中提供 AuthContext
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
-    // 检查 localStorage 中是否有用户信息，保持登录状态
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(storedUser);
@@ -46,7 +42,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-// 自定义 hook：用于访问 AuthContext
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

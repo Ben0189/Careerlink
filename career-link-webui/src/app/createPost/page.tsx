@@ -21,7 +21,6 @@ import {
   SelectContent,
 } from "@/components/ui/select";
 import NavigationBar from '../navbar';
-import "./createPost.css";
 
 const formSchema = z.object({
   jobTitle: z.string(),
