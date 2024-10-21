@@ -1,11 +1,13 @@
 
 "use client"; 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { json } from "stream/consumers";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: string | null;
-  login: (user: string) => void;
+  login: (user: string, recruiter: boolean) => void;
+  fullName: string;
+  isRecruiter: boolean;
   logout: () => void;
 }
 
@@ -13,30 +15,31 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<string | null>(null);
-
+  const [fullName, setFullName] = useState("");
+  const [isRecruiter, setRecruiter] = useState(false);
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem("userData");
     if (storedUser) {
-      setUser(storedUser);
       setIsAuthenticated(true);
+      const { firstName, lastName, isRecruiter } = JSON.parse(storedUser);
+      setFullName(`${firstName} ${lastName}`);
+      setRecruiter(isRecruiter);
     }
   }, []);
 
-  const login = (user: string) => {
-    localStorage.setItem("user", user);
-    setUser(user);
+  const login = (user: string, recruiter: boolean) => {
+    setFullName(user);
     setIsAuthenticated(true);
+    setRecruiter(recruiter);
   };
 
   const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
+    localStorage.removeItem("userData");
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, isRecruiter, fullName }}>
       {children}
     </AuthContext.Provider>
   );

@@ -8,6 +8,7 @@ import { generateJobDescription } from "../home/prompt";
 
 export default function FindCandidate() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [filteredCandidates, setFilteredCandidates] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -22,15 +23,17 @@ export default function FindCandidate() {
 
         const transformedCandidates: Candidate[] = posts.map((post: any) => ({
           id: post.postId.toString(), 
-          name: post.user.userName, 
-          jobTitle: post.jobTitle ?? "unknown", 
+          name: `${post.user.firstName} ${post.user.lastName}`, 
+          jobTitle: post.title ?? "unknown", 
           description: post.description, 
           experienceLevel: post.experienceLevel, 
+          resumeUrl: post.resumeUrl,
           skillName: post.skillNames, 
           email: post.user.email,
           phone: post.user.phoneNumber ?? '', 
         }));
         setCandidates(transformedCandidates); 
+        setFilteredCandidates(transformedCandidates);
       } catch (err) {
         setError("Failed to fetch posts");
       } finally {
@@ -44,7 +47,7 @@ export default function FindCandidate() {
     setSearchText(text);
   };
 
-  function filterCandidates(skillList: string, experienceLevel: number) {
+  function filterCandidatesByCriteria(skillList: string, experienceLevel: number) {
     const skillArray = skillList
       .split(",")
       .map((skill) => skill.trim().toLowerCase());
@@ -58,7 +61,7 @@ export default function FindCandidate() {
       .filter(
         (candidate) =>
           candidate.matchedSkills > 0 &&
-          candidate.experienceLevel >= experienceLevel
+          candidate.experienceLevel === experienceLevel
       )
       .sort((a, b) => {
         if (b.matchedSkills !== a.matchedSkills) {
@@ -69,7 +72,7 @@ export default function FindCandidate() {
     return filteredCandidates;
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (experienceLevel: number) => {
     setLoading(true);
     setError("");
     try {
@@ -88,7 +91,7 @@ export default function FindCandidate() {
         }
       );
       const skillsString = chatResult.data.choices[0].message.content;
-      setCandidates(filterCandidates(skillsString, 0));
+      setFilteredCandidates(filterCandidatesByCriteria(skillsString, experienceLevel));
     } catch (error: any) {
       console.error("Error calling the API:", error);
       if (error.response) {
@@ -105,15 +108,21 @@ export default function FindCandidate() {
     setSearchText("");
   };
   return (
-    <>
-      {/* <NavigationBar /> */}
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex flex-col items-center justify-center p-6 w-full">
+      <div className="fixed top-0 left-0 w-full bg-gradient-to-b from-zinc-200 border-b border-gray-300 dark:border-neutral-800 dark:bg-zinc-800/30 backdrop-blur-2xl">
+        <div className="flex items-center justify-center py-4">
+          <h1 className="text-lg font-semibold text-black dark:text-white">Candidates List</h1>
+        </div>
+      </div>
+  
+      <div className="w-full max-w-6xl mt-20 p-8 rounded-lg shadow-lg bg-white dark:bg-zinc-800">
         <ListofPost
-          candidates={candidates}
+          candidates={filteredCandidates}
           onSearchTextUpdate={handleSearchTextUpdate}
           onFindCandidates={handleSubmit}
         />
-      </main>
-    </>
+      </div>
+    </main>
   );
+  
 }
