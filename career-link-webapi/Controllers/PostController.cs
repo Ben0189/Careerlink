@@ -27,6 +27,12 @@ namespace Career_link_webapi.Controllers
             return Ok(await _postService.GetPostById(id));
         }
 
+        [HttpGet("users/{userId}")]
+        public async Task<IActionResult> GetTaskByUserId(string userId)
+        {
+            return Ok(await _postService.GetPostsByUserId(userId));
+        }
+
         [HttpGet("search")]
         public async Task<ActionResult<List<PostDTO>>> SearchPost([FromQuery] int experienceLevel, [FromQuery] List<int> skillIds)
         {

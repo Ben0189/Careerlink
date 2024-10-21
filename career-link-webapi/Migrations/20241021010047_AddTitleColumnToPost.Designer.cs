@@ -4,6 +4,7 @@ using Career_link_webapi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Career_link_webapi.Migrations
 {
     [DbContext(typeof(CareerLinkDbContext))]
-    partial class CareerLinkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241021010047_AddTitleColumnToPost")]
+    partial class AddTitleColumnToPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,10 +37,6 @@ namespace Career_link_webapi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResumeUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -67,7 +66,6 @@ namespace Career_link_webapi.Migrations
                             PostId = 1,
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Looking for a software engineering job.",
-                            ResumeUrl = "https://example.com/resume",
                             Title = "Software Engineer",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "testuser",
@@ -78,7 +76,6 @@ namespace Career_link_webapi.Migrations
                             PostId = 2,
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Excited about new opportunities in data science.",
-                            ResumeUrl = "https://example.com/resume",
                             Title = "Software Engineer",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "testuser",
@@ -89,7 +86,6 @@ namespace Career_link_webapi.Migrations
                             PostId = 3,
                             CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Interested in remote work positions.",
-                            ResumeUrl = "https://example.com/resume",
                             Title = "Software Engineer",
                             UpdatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = "testuser",
@@ -200,7 +196,7 @@ namespace Career_link_webapi.Migrations
                         {
                             Id = "testuser",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "74308bd4-01e4-4ecd-a974-f465712b2196",
+                            ConcurrencyStamp = "3b6a2b73-20a1-4385-bfab-5399f2010717",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "predefineduser@example.com",
                             EmailConfirmed = true,
@@ -212,7 +208,7 @@ namespace Career_link_webapi.Migrations
                             NormalizedUserName = "PREDEFINEDUSER",
                             PasswordHash = "plaintextpassword",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b27becf2-9ab0-4c10-b438-6a59f5d954d3",
+                            SecurityStamp = "727407d1-c804-4aa9-9338-9a960a9e82c8",
                             TwoFactorEnabled = false,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "predefineduser"

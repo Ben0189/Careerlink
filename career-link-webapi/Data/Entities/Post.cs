@@ -11,9 +11,12 @@ public class Post
 
     public string UserId { get; set; }
 
+    public string Title { get; set; }
+
     public string Description { get; set; }
 
     public int experienceLevel { get; set; }
+    public string ResumeUrl { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
