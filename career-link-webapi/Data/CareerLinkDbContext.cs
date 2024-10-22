@@ -42,8 +42,10 @@ namespace Career_link_webapi.Data
                 {
                     PostId = 1,
                     UserId = "testuser",
+                    Title = "Software Engineer",
                     experienceLevel = 2,
                     Description = "Looking for a software engineering job.",
+                    ResumeUrl = "https://example.com/resume",
                     CreatedDate = fixedDate,
                     UpdatedDate = fixedDate
                 },
@@ -52,7 +54,9 @@ namespace Career_link_webapi.Data
                     PostId = 2,
                     UserId = "testuser",
                     experienceLevel=1,
+                    Title = "Software Engineer",
                     Description = "Excited about new opportunities in data science.",
+                    ResumeUrl = "https://example.com/resume",
                     CreatedDate = fixedDate,
                     UpdatedDate = fixedDate
                 },
@@ -61,7 +65,9 @@ namespace Career_link_webapi.Data
                     PostId = 3,
                     UserId = "testuser",
                     experienceLevel=3,
+                    Title = "Software Engineer",
                     Description = "Interested in remote work positions.",
+                    ResumeUrl = "https://example.com/resume",
                     CreatedDate = fixedDate,
                     UpdatedDate = fixedDate
                 }

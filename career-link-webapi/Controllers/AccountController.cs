@@ -39,7 +39,7 @@ namespace Career_link_webapi.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(new { user.Email });
+                return Ok(new { user.Email, user.Id });
             }
 
             return BadRequest(result.Errors);
@@ -69,7 +69,8 @@ namespace Career_link_webapi.Controllers
                     user.PhoneNumber,
                     user.FirstName,
                     user.LastName,
-                    user.IsRecruiter
+                    user.IsRecruiter,
+                    user.Id
                 };
 
                 return Ok(userData); // Return user data
